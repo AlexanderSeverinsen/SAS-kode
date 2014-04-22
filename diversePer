@@ -1,0 +1,46 @@
+Enter file contents here
+
+/* eCircle er kampanjemotor (det er postmannen) 
+Teradata som eier eCircle
+
+Communicator er en konkurrent som OMG skal ha sine kunder over på,
+Aller Media er på vei hit. Er Communicator den beste "postmannen"?
+
+*/
+
+/* ------    Morten Kirsbo drifter dette  
+
+Spør Morten om disse dataene ift ComlogID ....
+
+1. Er det mulig å se de 5 brevene i sammenheng i E-circle?
+
+
+---------- */
+
+
+/* Denne koden viser tilgjengelige filer    */
+filename liste pipe 'find  /crm/campaign_data/returer_fra_ecircle/ -name sasdata -type d';
+data _null_;
+	infile liste;
+	input;
+	put _infile_;
+run;
+
+/* Hvorfor ulike navn på cw, kundehjul og welcome_phase? Det er det samme, men Morten og
+Per har brukt litt ulike navnekonvensjoner 
+
+ComlogID kan ikke stoles på. Den er av typen CampaignAttribute. Den slettes mellom ulike kjøringer
+på brev grunnet ecircle oppsett. Selv om den er er KAN den tilhøre et annet brev enn det kunden leste.
+Dvs. et senere brev (min note: MEN, kan jo se på SERIEN AV BREV IFT MAPPING.
+
+*/
+
+
+/* setter opp eget libname for hver enkelt tilgang */
+
+
+/* Hentet ut av loggen */
+
+ /* ------------ cw ------------------ */
+
+libname ecircle1 clear; /* fjerne lib */
